@@ -1,12 +1,17 @@
 # ------------------------------------------------------------------------------------------
 # MdFileSearchMoveTool.sh automates the process to search the contents of the directory which
 # this script is in and move all found files to a specified directory
-# v1.0
+# - If directory doesn't exist, create directory
+# v1.1
 # ------------------------------------------------------------------------------------------
 
 mdFileNames=($(ls *.md))
 destination="./destination"
 declare -a foundFiles
+if [ ! -d "$destination" ]; then
+  echo "$destination does not exist."
+  mkdir $destination
+fi
 echo Enter search word:
 read searchWord
 searchWordUpper=$(echo $searchWord | tr '[:lower:]' '[:upper:]')
